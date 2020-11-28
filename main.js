@@ -1,5 +1,14 @@
+const Discord = require("discord.js");
+const fs = require("fs");
+const client = new Discord.Client
+const prefix = ">"
+
 let anti = JSON.parse(fs.readFileSync("./antigreff.json", "UTF8")); // create antigreff.json file with {} inside it
 let config = JSON.parse(fs.readFileSync("./config.json", "UTF8")); // create config.json file with {} inside it
+
+client.on('ready', function() {
+  console.log(`${client.user.tag} is online!`)
+
 
 client.on("message", message => {
     if (!message.channel.guild) return;
@@ -201,7 +210,7 @@ client.on("roleCreate", async channel => {
     });
 });
 
-client.on("guildBanAdd", async (guild, user) => {
+client.on("guildBanAdd", async (guild, user, channel) => {
     const entry1 = await channel.guild.fetchAuditLogs({
         type: 'MEMBER_BAN_ADD'
     }).then(audit => audit.entries.first())
@@ -246,7 +255,7 @@ client.on("guildBanAdd", async (guild, user) => {
     });
 });
 
-client.on("guildKickAdd", async (guild, user) => {
+client.on("guildKickAdd", async (guild, user, channel) => {
     const entry1 = await channel.fetchAuditLogs({
         type: 'MEMBER_KICK'
     }).then(audit => audit.entries.first())
@@ -292,8 +301,8 @@ client.on("guildKickAdd", async (guild, user) => {
     });
 });
 
-client.on("guildMemberRemove", async member => {
-    const entry1 = await member.guild.fetchAuditLogs().then(audit => audit.entries.first())
+client.on("guildMemberRemove", async (guild, member) => {
+    const entry1 = member.guild.fetchAuditLogs().then(audit => audit.entries.first())
     if (entry1.action === "MEMBER_KICK") {
         const entry2 = await member.guild.fetchAuditLogs({
             type: "MEMBER_KICK"
@@ -340,3 +349,6 @@ client.on("guildMemberRemove", async member => {
     }
 
 })
+})
+
+client.login(process.env.token); // put the bot's token in the .env file dick in my ass u like dick dick dick dick dick dick
