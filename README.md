@@ -1,3 +1,8 @@
-# Get Started!
+# ANTI-NUKE DJS
+MADE BY KAZION#1337
+LET ME KNOW IF YOU NEED HELP
+THIS IS NOT GUARDIAN, SKIDSK
 
-Add files and start typing 🎉
+CREDIT ME.
+
+[Join My Server](https://discord.gg/pfps)
